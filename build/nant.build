@@ -1,2 +1,7 @@
 <project name = "Test">
+
+<target name="prepare">
+    <echo message="test"/>
+</target>
+
 </project>
