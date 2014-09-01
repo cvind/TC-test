@@ -1,5 +1,40 @@
 <project name = "Test">
 
+<echo message="Build configuration:" />
+<script language="C#">
+    <references>
+        <include name="System.dll" />
+    </references>       
+    <imports>
+        <import namespace="System.Collections.Generic" />
+    </imports>  
+    <code>
+        <![CDATA[
+            public static void ScriptMain(Project project)
+            {
+                System.Collections.Generic.SortedDictionary<string, string> sortedByKey = new System.Collections.Generic.SortedDictionary<string, string>();
+                foreach(DictionaryEntry de in project.Properties)
+                {
+                    sortedByKey.Add(de.Key.ToString(), de.Value.ToString());
+                } 
+
+                NAnt.Core.Tasks.EchoTask echo = new NAnt.Core.Tasks.EchoTask();
+                echo.Project = project;
+                foreach(System.Collections.Generic.KeyValuePair<string, string> kvp in sortedByKey)
+                {
+                    Console.WriteLine(String.Format("{0}: {1}", kvp.Key, kvp.Value));
+                    if(kvp.Key.StartsWith("nant."))
+                    {
+                        continue;
+                    }  
+                    echo.Message = String.Format("{0}: {1}", kvp.Key, kvp.Value);
+                    echo.Execute();
+                }
+            }
+        ]]>
+    </code>
+</script>
+
 <target name="test" depends="echo-properties">
 </target>
 
