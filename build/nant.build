@@ -41,7 +41,7 @@
 </target>
 
 <target name="set-params">
-    <echo message="##teamcity[buildNumber '1.2.3.{build.number}-rc']"/>
+    <echo message="##teamcity[buildNumber '1.0.{build.number}']"/>
 </target>
 
 </project>
