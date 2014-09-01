@@ -30,11 +30,7 @@
     </code>
 </script>
 
-<target name="test" depends="echo-properties,env-setup">
-</target>
-
-<target name="prepare">
-    <echo message="test"/>
+<target name="test" depends="env-setup">
 </target>
 
 <target name="env-setup">
@@ -42,22 +38,6 @@
         <echo message="Local build!"/>
         <property name="build.number" value="0.0"/>
     </if>
-</target>
-
-<target name="echo-properties" verbose="false" description="Echo property values" inheritall="true">
-<script language="C#">
-    <code>
-        <![CDATA[
-        public static void ScriptMain(Project project) 
-        {
-            foreach (DictionaryEntry entry in project.Properties)
-            {
-                Console.WriteLine("{0}={1}", entry.Key, entry.Value);
-            }
-        }
-        ]]>
-    </code>
-</script>
 </target>
 
 </project>
