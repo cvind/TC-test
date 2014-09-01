@@ -1,5 +1,19 @@
 <project name = "Test">
 
+<script language="C#" prefix="util" >
+    <code>
+        <![CDATA[
+        public static void ScriptMain(Project project) 
+        {
+            foreach (DictionaryEntry entry in project.Properties)
+            {
+                Console.WriteLine("{0}={1}", entry.Key, entry.Value);
+            }
+        }
+        ]]>
+    </code>
+</script>
+
 <target name="prepare">
     <echo message="test"/>
 </target>
