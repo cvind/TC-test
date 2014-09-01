@@ -1,6 +1,14 @@
 <project name = "Test">
 
-<script language="C#" prefix="util" >
+<target name="test" depends="echo-properties">
+</target>
+
+<target name="prepare">
+    <echo message="test"/>
+</target>
+
+<target name="echo-properties" verbose="false" description="Echo property values" inheritall="true">
+<script language="C#">
     <code>
         <![CDATA[
         public static void ScriptMain(Project project) 
@@ -13,9 +21,6 @@
         ]]>
     </code>
 </script>
-
-<target name="prepare">
-    <echo message="test"/>
 </target>
 
 </project>
