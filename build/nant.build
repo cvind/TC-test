@@ -40,4 +40,8 @@
     </if>
 </target>
 
+<target name="set-params">
+    <echo message="##teamcity[buildNumber '1.2.3.{build.number}-rc']"/>
+</target>
+
 </project>
