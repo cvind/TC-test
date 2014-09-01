@@ -22,11 +22,6 @@
                 echo.Project = project;
                 foreach(System.Collections.Generic.KeyValuePair<string, string> kvp in sortedByKey)
                 {
-                    Console.WriteLine(String.Format("{0}: {1}", kvp.Key, kvp.Value));
-                    if(kvp.Key.StartsWith("nant."))
-                    {
-                        continue;
-                    }  
                     echo.Message = String.Format("{0}: {1}", kvp.Key, kvp.Value);
                     echo.Execute();
                 }
@@ -35,11 +30,18 @@
     </code>
 </script>
 
-<target name="test" depends="echo-properties">
+<target name="test" depends="echo-properties,env-setup">
 </target>
 
 <target name="prepare">
     <echo message="test"/>
+</target>
+
+<target name="env-setup">
+    <if test="${not property::exists('build.number')}">
+        <echo message="Local build!"/>
+        <property name="build.number" value="0.0"/>
+    </if>
 </target>
 
 <target name="echo-properties" verbose="false" description="Echo property values" inheritall="true">
