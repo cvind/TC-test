@@ -12,9 +12,20 @@
 <target name="all" depends="configure,build,test"/>
 
 <target name="clean"/>
-<target name="configure" depends="conf.build,conf.dump"/>
+<target name="configure" depends="conf.read-build.config,conf.build,conf.service-messages,conf.dump"/>
 <target name="build" depends="build.TheWorks"/>
 <target name="test" depends="test.TheWorks"/>
+
+<target name="conf.read-build.config">
+    <xmlpeek file="build.config.xml" property="version.major" xpath="/root/version/major"/>
+    <xmlpeek file="build.config.xml" property="version.minor" xpath="/root/version/minor"/>
+    <xmlpeek file="build.config.xml" property="version.patch" xpath="/root/version/patch"/>
+    <echo message="${version.major}.${version.minor}"/>
+</target>
+
+<target name="conf.service-messages">
+    <echo message="##teamcity[buildNumber '1.0.{build.number}']"/>
+</target>
 
 <target name="conf.build">
     <property name="build.configuration" value="Debug" overwrite="false"/>
@@ -54,15 +65,6 @@
     </if>
 </target>
 
-<target name="set-params">
-    <echo message="##teamcity[buildNumber '1.0.{build.number}']"/>
-</target>
 
-<target name="read-build.config">
-    <xmlpeek file="build.config.xml" property="version.major" xpath="/root/version/major"/>
-    <xmlpeek file="build.config.xml" property="version.minor" xpath="/root/version/minor"/>
-    <xmlpeek file="build.config.xml" property="version.patch" xpath="/root/version/patch"/>
-    <echo message="${version.major}.${version.minor}"/>
-</target>
 
 </project>
