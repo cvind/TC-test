@@ -7,13 +7,14 @@
 <!-- package      : Creates install package(s).                                                 -->
 
 <include buildfile="sub/vs2010.build"/>
+<include buildfile="sub/nunit.build"/>
 
 <target name="all" depends="configure,build,test"/>
 
 <target name="clean"/>
 <target name="configure" depends="conf.build,conf.dump"/>
 <target name="build" depends="build.TheWorks"/>
-<target name="test"/>
+<target name="test" depends="test.TheWorks"/>
 
 <target name="conf.build">
     <property name="build.configuration" value="Debug" overwrite="false"/>
@@ -29,6 +30,17 @@
 
 <target name="build.TheWorks" depends="msvs.setup">
     <exec program="msbuild" commandline="/nologo /target:Build /p:Configuration=${build.configuration} ${folder.project}\src\TheWorks.sln"/>
+</target>
+
+<target name="test.TheWorks" depends="nunit.setup">
+    <nunit2>
+        <formatter type="Plain" />    
+        <test>
+            <assemblies>
+                <include name="../src/**/bin/${build.configuration}/*Tests.dll"/>
+            </assemblies>
+        </test>
+    </nunit2>
 </target>
 
 

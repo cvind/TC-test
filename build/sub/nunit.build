@@ -1,0 +1,11 @@
+<project>
+
+    <target name="nunit.setup">
+        <property name="folder.nunit" value="C:\Program Files (x86)\NUnit 2.6.3\bin"/>
+        <setenv>
+            <variable name="PATH" value="${folder.nunit};${environment::get-variable('PATH')}\"/>
+        </setenv>
+    </target>
+</project>
+
+
