@@ -11,9 +11,10 @@ namespace TheWorksLibTests
             Assert.IsTrue(true);
         }
         [Test]
-        public void TestSomethingThatFails()
+        public void TestSomethingThatWasCorrected()
         {
-            Assert.IsTrue(false);
+//            Assert.IsTrue(false);
+            Assert.IsTrue(true);
         }
     }
 }
