@@ -35,11 +35,11 @@
     <property name="version.full" value="${version.full} (${version.codename})" if="${property::exists('version.codename')}"/>
     <property name="version.full" value="${version.full} [${build.configuration}]" if="${build.configuration == 'Debug'}"/>
     
-    <echo message="Version: ${version.full}"/>
+    <echo message="Project: ${version.full}"/>
 </target>
 
 <target name="conf.service-messages">
-    <echo message="##teamcity[buildNumber '1.0.{build.number}']"/>
+    <echo message="##teamcity[buildNumber '${version.major}.${version.minor}.${version.patch}.{build.number}']"/>
 </target>
 
 <target name="conf.build">
