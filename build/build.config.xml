@@ -1,8 +1,12 @@
 <root>
+    <project-name>TheWorks</project-name>
     <version>
-        <major>1</major>
-        <minor>0</minor>
+        <major>0</major>
+        <minor>1</minor>
         <patch>0</patch>
-        <rc></rc>
+<!--
+        <rc>1</rc>
+        <codename>Longhorn</codename>
+-->
     </version>
 </root>

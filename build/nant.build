@@ -12,15 +12,30 @@
 <target name="all" depends="configure,build,test"/>
 
 <target name="clean"/>
-<target name="configure" depends="conf.read-build.config,conf.build,conf.service-messages,conf.dump"/>
+<target name="configure" depends="conf.read-build.config,conf.service-messages,conf.dump"/>
 <target name="build" depends="build.TheWorks"/>
 <target name="test" depends="test.TheWorks"/>
 
-<target name="conf.read-build.config">
+<target name="conf.read-build.config" depends="conf.build">
+
+    <property name="build.number" value="x" overwrite="false"/>
+    <echo message="build.number: ${build.number} (after)"/>
+
+    <xmlpeek file="build.config.xml" property="project.name" xpath="/root/project-name"/>
     <xmlpeek file="build.config.xml" property="version.major" xpath="/root/version/major"/>
     <xmlpeek file="build.config.xml" property="version.minor" xpath="/root/version/minor"/>
-    <xmlpeek file="build.config.xml" property="version.patch" xpath="/root/version/patch"/>
-    <echo message="${version.major}.${version.minor}"/>
+    <xmlpeek file="build.config.xml" property="version.patch" xpath="/root/version/patch" failonerror="false"/>
+    <xmlpeek file="build.config.xml" property="version.rc" xpath="/root/version/rc" failonerror="false"/>
+    <xmlpeek file="build.config.xml" property="version.codename" xpath="/root/version/codename" failonerror="false"/>
+    
+    <property name="version.patch" value="0" overwrite="false"/>
+
+    <property name="version.full" value="${project.name} ${version.major}.${version.minor}.${version.patch}.${build.number}"/>
+    <property name="version.full" value="${version.full}-rc${version.rc}" if="${property::exists('version.rc')}"/>
+    <property name="version.full" value="${version.full} (${version.codename})" if="${property::exists('version.codename')}"/>
+    <property name="version.full" value="${version.full} [${build.configuration}]" if="${build.configuration == 'Debug'}"/>
+    
+    <echo message="Version: ${version.full}"/>
 </target>
 
 <target name="conf.service-messages">
