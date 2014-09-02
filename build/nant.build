@@ -61,6 +61,12 @@
           if="${build.configuration == 'Debug'}"/>
     <echo message="WARNING: This build is not suitable for production! It is a release candidate for testing (version.rc not empty)"
           if="${property::exists('version.rc')}"/>
+    <echo message="##teamcity[message text='This build is not suitable for production! It was not build by the build server (build.number = x)' errorDetails='' status='WARNING']"
+           if="${build.number == 'x'}"/>
+    <echo message="##teamcity[message text='This build is not suitable for production! It is build in debug configuration (build.configuration = Debug)' errorDetails='' status='WARNING']"
+          if="${build.configuration == 'Debug'}"/>
+    <echo message="##teamcity[message text='This build is not suitable for production! It is a release candidate for testing (version.rc not empty)' errorDetails='' status='WARNING']"
+          if="${property::exists('version.rc')}"/>
 </target>
 
 <target name="build.TheWorks" depends="msvs.setup">
