@@ -1,0 +1,27 @@
+<project>
+
+    <target name="msvs.setup">
+        <property name="folder.msvs" value="${environment::get-variable('ProgramFiles(x86)')}\Microsoft Visual Studio 10.0"/>
+        <property name="folder.msvc" value="${folder.msvs}\VC"/>
+        <property name="folder.framework" value="${environment::get-variable('windir')}\Microsoft.NET\Framework"/>
+        <property name="folder.winsdk" value="${environment::get-variable('ProgramFiles(x86)')}\Microsoft SDKs\Windows\v7.0A"/>
+        <setenv>
+            <variable name="DevEnvDir" value="${folder.msvs}\Common7\IDE\"/>
+            <variable name="Framework35Version" value="v3.5"/>
+            <variable name="FrameworkDir" value="${folder.framework}\"/>
+            <variable name="FrameworkDIR32" value="${folder.framework}\"/>
+            <variable name="FrameworkVersion" value="v4.0.30319"/>
+            <variable name="FrameworkVersion32" value="v4.0.30319"/>
+            <variable name="FSHARPINSTALLDIR" value="${environment::get-variable('ProgramFiles(x86)')}\Microsoft F#\v4.0\"/>
+            <variable name="INCLUDE" value="${folder.msvc}\INCLUDE;${folder.msvc}\ATLMFC\INCLUDE;${folder.winsdk}\include;"/>
+            <variable name="LIB" value="${folder.msvc}\LIB;${folder.msvc}\ATLMFC\LIB;${folder.winsdk}\lib;"/>
+            <variable name="LIBPATH" value="${folder.framework}\v4.0.30319;${folder.framework}\v3.5;${folder.msvc}\LIB;${folder.msvc}\ATLMFC\LIB;"/>
+            <variable name="VCINSTALLDIR" value="${folder.msvc}\"/>
+            <variable name="VSINSTALLDIR" value="${folder.msvs}\"/>
+            <variable name="WindowsSdkDir" value="${folder.winsdk}\"/>
+            <variable name="PATH" value="C:\Program Files (x86)\Microsoft F#\v4.0\;${folder.msvs}\VSTSDB\Deploy;${folder.msvs}\Common7\IDE\;${folder.msvc}\BIN;${folder.msvs}\Common7\Tools;${folder.framework}\v4.0.30319;${folder.framework}\v3.5;${folder.msvc}\VCPackages;C:\Program Files (x86)\HTML Help Workshop;${folder.msvs}\Team Tools\Performance Tools;${folder.winsdk}\bin\NETFX 4.0 Tools;${folder.winsdk}\bin;${environment::get-variable('PATH')}\"/>
+        </setenv>
+    </target>
+</project>
+
+

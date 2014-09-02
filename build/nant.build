@@ -1,37 +1,39 @@
-<project name = "Test">
+<project name = "Test" default="all">
 
-<echo message="Build configuration:" />
-<script language="C#">
-    <references>
-        <include name="System.dll" />
-    </references>       
-    <imports>
-        <import namespace="System.Collections.Generic" />
-    </imports>  
-    <code>
-        <![CDATA[
-            public static void ScriptMain(Project project)
-            {
-                System.Collections.Generic.SortedDictionary<string, string> sortedByKey = new System.Collections.Generic.SortedDictionary<string, string>();
-                foreach(DictionaryEntry de in project.Properties)
-                {
-                    sortedByKey.Add(de.Key.ToString(), de.Value.ToString());
-                } 
+<!-- Targets -->
+<!-- configure    : Configure the build process environment and properties for paths and such.  -->
+<!-- build        : Compiles the solution(s) using msbuild.                                     -->
+<!-- test         : Runs the unittests.                                                         -->
+<!-- package      : Creates install package(s).                                                 -->
 
-                NAnt.Core.Tasks.EchoTask echo = new NAnt.Core.Tasks.EchoTask();
-                echo.Project = project;
-                foreach(System.Collections.Generic.KeyValuePair<string, string> kvp in sortedByKey)
-                {
-                    echo.Message = String.Format("{0}: {1}", kvp.Key, kvp.Value);
-                    echo.Execute();
-                }
-            }
-        ]]>
-    </code>
-</script>
+<include buildfile="sub/vs2010.build"/>
 
-<target name="test" depends="env-setup">
+<target name="all" depends="configure,build,test"/>
+
+<target name="clean"/>
+<target name="configure" depends="conf.build,conf.dump"/>
+<target name="build" depends="build.TheWorks"/>
+<target name="test"/>
+
+<target name="conf.build">
+    <property name="build.configuration" value="Debug" overwrite="false"/>
+    <property name="folder.project" value="${path::get-directory-name(directory::get-current-directory())}"/>
+    
+    <echo message="folder.project: ${folder.project}"/>
 </target>
+
+<target name="conf.dump">
+    <echo message="Build configuration:"/>
+    <echo message="- build.configuration : ${build.configuration}"/>
+</target>
+
+<target name="build.TheWorks" depends="msvs.setup">
+    <exec program="msbuild" commandline="/nologo /target:Build /p:Configuration=${build.configuration} ${folder.project}\src\TheWorks.sln"/>
+</target>
+
+
+
+
 
 <target name="env-setup">
     <if test="${not property::exists('build.number')}">

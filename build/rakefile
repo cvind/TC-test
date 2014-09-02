@@ -1,0 +1,18 @@
+desc 'Default build task'
+task :default => :all
+
+desc 'Run a CI build process'
+task :all => :configure
+task :all => :build
+
+desc 'Configures the build process'
+task :configure do
+    puts "Configuring build process..."
+end
+
+desc 'Compiles projects into assemblies'
+task :build do
+    puts "The build process itself..."
+    puts "  build_configuration: #{ENV.build_configuration}"
+end
+
