@@ -61,7 +61,7 @@
           if="${build.configuration == 'Debug'}"/>
     <echo message="WARNING: This build is not suitable for production! It is a release candidate for testing (version.rc not empty)"
           if="${property::exists('version.rc')}"/>
-    <echo message="##teamcity[buildStatus status='SUCCESS' text='{build.status.text} Not suitable for production!']"
+    <echo message="##teamcity[buildStatus status='SUCCESS' text='{build.status.text}, Not suitable for production!']"
            if="${build.number == 'x' or build.configuration == 'Debug' or property::exists('version.rc')}"/>
 </target>
 

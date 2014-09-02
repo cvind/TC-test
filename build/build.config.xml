@@ -4,9 +4,7 @@
         <major>0</major>  <!-- Increment on major changes in GUI, functionality and/or external interfaces -->
         <minor>1</minor>  <!-- Increment on minor changes in GUI, functionality or internal interfaces. Client/server backward compatibility -->
         <patch>0</patch>  <!-- Increment on bugfixes only -->
-        <rc>1</rc>        <!-- removed in production release! increment on each test release - must be  -->
-<!--
-        <codename>Longhorn</codename>
--->
+        <!-- <rc>1</rc> -->        <!-- removed in production release! increment on each test release - must be  -->
+        <!-- <codename>Longhorn</codename> -->
     </version>
 </root>
