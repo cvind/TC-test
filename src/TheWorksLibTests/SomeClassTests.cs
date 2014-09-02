@@ -13,8 +13,8 @@ namespace TheWorksLibTests
         [Test]
         public void TestSomethingThatWasCorrected()
         {
-//            Assert.IsTrue(false);
-            Assert.IsTrue(true);
+            Assert.IsTrue(false);
+            //Assert.IsTrue(true);
         }
     }
 }
