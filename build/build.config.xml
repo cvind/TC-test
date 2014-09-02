@@ -1,11 +1,11 @@
 <root>
     <project-name>TheWorks</project-name>
     <version>
-        <major>0</major>
-        <minor>1</minor>
-        <patch>0</patch>
+        <major>0</major>  <!-- Increment on major changes in GUI, functionality and/or external interfaces -->
+        <minor>1</minor>  <!-- Increment on minor changes in GUI, functionality or internal interfaces. Client/server backward compatibility -->
+        <patch>0</patch>  <!-- Increment on bugfixes only -->
+        <rc>1</rc>        <!-- removed in production release! increment on each test release - must be  -->
 <!--
-        <rc>1</rc>
         <codename>Longhorn</codename>
 -->
     </version>

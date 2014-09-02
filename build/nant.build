@@ -30,12 +30,13 @@
     
     <property name="version.patch" value="0" overwrite="false"/>
 
-    <property name="version.full" value="${project.name} ${version.major}.${version.minor}.${version.patch}.${build.number}"/>
+    <property name="version.full" value="${version.major}.${version.minor}.${version.patch}.${build.number}"/>
     <property name="version.full" value="${version.full}-rc${version.rc}" if="${property::exists('version.rc')}"/>
     <property name="version.full" value="${version.full} (${version.codename})" if="${property::exists('version.codename')}"/>
     <property name="version.full" value="${version.full} [${build.configuration}]" if="${build.configuration == 'Debug'}"/>
     
-    <echo message="Project: ${version.full}"/>
+    <echo message="Project: ${project.name} version ${version.full}"/>
+
 </target>
 
 <target name="conf.service-messages">
@@ -50,8 +51,16 @@
 </target>
 
 <target name="conf.dump">
-    <echo message="Build configuration:"/>
-    <echo message="- build.configuration : ${build.configuration}"/>
+    <echo message="Build process:"/>
+    <echo message="- Product       : ${project.name}"/>
+    <echo message="- Version       : ${version.full}"/>
+    <echo message="- Configuration : ${build.configuration}"/>
+    <echo message="WARNING: This build is not suitable for production! It was not build by the build server (build.number = x)"
+          if="${build.number == 'x'}"/>
+    <echo message="WARNING: This build is not suitable for production! It is build in debug configuration (build.configuration = Debug)"
+          if="${build.configuration == 'Debug'}"/>
+    <echo message="WARNING: This build is not suitable for production! It is a release candidate for testing (version.rc not empty)"
+          if="${property::exists('version.rc')}"/>
 </target>
 
 <target name="build.TheWorks" depends="msvs.setup">
