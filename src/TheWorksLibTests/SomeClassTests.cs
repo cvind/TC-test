@@ -8,6 +8,7 @@ namespace TheWorksLibTests
         [Test]
         public void TestSomethingThatSucceeds()
         {
+            var someValue = true;
             Assert.IsTrue(true);
         }
         [Test]
